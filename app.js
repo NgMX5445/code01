@@ -2,12 +2,25 @@ const express = require('express');
 //const { EMPTY_RESULT_ERROR, DUPLICATE_ENTRY_ERROR, TABLE_ALREADY_EXISTS_ERROR } = require('./errors');
 const modulesModel = require('./models/modules');
 
-// const app = express();
-// // app.use ,app.post all is route
+const app = express();
+// app.use ,app.post all is route
 
-// app.use(express.json()); // to process JSON in request body
+app.use(express.json()); // to process JSON in request body
 
-// app.use(express.static('public'));
+app.use(express.static('public'));
+
+app.get('/user', function (req, res, next) {
+    return modulesModel
+        .getAllUser()
+        .then(function (ress) {
+            return res.send(ress);
+        })
+        .catch(function (error) {
+            console.error(error);
+         
+            return res.status(500).json({ error: 'Unknown Error' });
+        });
+});
 
 app.post('/modules/table', function (req, res, next) {
     return modulesModel
@@ -41,3 +54,5 @@ app.post('/modules', function (req, res, next) {
             } else return res.status(500).json({ error: 'Unknown Error' });
         });
 });
+
+module.exports = app;

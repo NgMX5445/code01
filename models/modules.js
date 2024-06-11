@@ -4,7 +4,20 @@ const {
     EMPTY_RESULT_ERROR,
     MYSQL_ERROR_CODE,
     TABLE_ALREADY_EXISTS_ERROR,
-} = require('../errors');
+} = require('../error');
+
+module.exports.getAllUser = function getAllUser() {
+    const sql = `SELECT * FROM code1.user`;
+    return query(sql, []).then(function (result) {
+        const rows = result[0];
+        console.log(rows[0])
+        if (rows.length === 0) {
+            throw new EMPTY_RESULT_ERROR(`Module ${code} not found!`);
+        }
+        return rows[0];
+    });
+};
+
 
 module.exports.initTable = function initTable() {
     const sql = `CREATE TABLE modules_tab (
