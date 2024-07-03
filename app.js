@@ -10,13 +10,39 @@ app.use(express.json()); // to process JSON in request body
 app.use(express.static('public'));
 
 app.get('/user', function (req, res, next) {
+
+
     return modulesModel
         .getAllUser()
         .then(function (ress) {
-            return res.send(ress);
+            return res.send(ress.name);
         })
         .catch(function (error) {
             console.error(error);
+         
+            return res.status(500).json({ error: 'Unknown Error' });
+        });
+});
+
+app.post('/login', function (req, res, next) {
+
+    const data = {
+        username: req.body.username,
+        password: req.body.password
+      }
+    
+    return modulesModel
+        .getUser(data.username,data.password)
+        .then(function (ress) {
+            console.log(ress)
+            return res.send(ress);
+        })
+        .catch(function (errors) {
+       
+            if(errors=="User does not exist"){
+               
+                return res.status(406).json({ error: "User does not exist , Please register" });
+            }
          
             return res.status(500).json({ error: 'Unknown Error' });
         });
