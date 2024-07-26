@@ -45,7 +45,7 @@ window.addEventListener('DOMContentLoaded', function () {
                     error.code = response.status;
                     throw error;
                 }
-                console.log(response.json());
+                console.log(response.status);
                 return response.json()
                 
                 .then(function (data) {
@@ -58,7 +58,7 @@ window.addEventListener('DOMContentLoaded', function () {
                         const userInfo = data.name
                         document.querySelector('#alertBox').style.display = 'none';
                         // window.localStorage.setItem('LoggedInUser', JSON.stringify(userInfo))
-                        // window.location.href = "/main";
+                        window.location.href = "/main.html";
                     });
             })
             
