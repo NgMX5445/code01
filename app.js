@@ -35,6 +35,7 @@ app.post('/login', function (req, res, next) {
         .getUser(data.username,data.password)
         .then(function (ress) {
             console.log(ress)
+      
             return res.send(ress);
         })
         .catch(function (errors) {

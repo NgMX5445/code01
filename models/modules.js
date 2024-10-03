@@ -7,7 +7,7 @@ const {
 } = require('../error');
 
 module.exports.getUser = function getUser(username,password) {
-    const sql = `SELECT * FROM code1.user WHERE username = ? AND password =?`;
+    const sql = `SELECT * FROM nginvest.user WHERE username = ? AND password =?`;
     return query(sql, [username,password]).then(function (result) {
         const row = result[0];
         if (row.length === 0) {
@@ -17,6 +17,10 @@ module.exports.getUser = function getUser(username,password) {
         return row[0];
     })
 };
+
+
+
+
 
 
 module.exports.getAllUser = function getAllUser() {

@@ -49,17 +49,20 @@ window.addEventListener('DOMContentLoaded', function () {
                 return response.json()
                 
                 .then(function (data) {
-                    console.log(data);
+                   
                         // if (data == null) {
                         //     const error = new Error('Unknown error')
                         //     error.code = 404;
                         //     throw error
                         // }
+                      
                         const userInfo = data.name
                         document.querySelector('#alertBox').style.display = 'none';
-                        // window.localStorage.setItem('LoggedInUser', JSON.stringify(userInfo))
-                        window.location.href = "/main.html";
-                    });
+                        window.localStorage.setItem('LoggedInUser', JSON.stringify(userInfo))
+                        window.location.href = "/main/main.html";
+                       
+                        return data;
+                    })
             })
             
             .catch(function (error) {
